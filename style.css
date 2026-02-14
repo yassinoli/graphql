@@ -38,3 +38,7 @@ button{
     border: none;
     background:darkorange;
 }
+
+.userInfo{
+    border: 1px solid black;
+}
