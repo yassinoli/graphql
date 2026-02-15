@@ -14,6 +14,7 @@ export async function fetchingprofile(jwt){
         login
         auditRatio
         avatarUrl
+        campus
          xps {
         amount
         path
@@ -32,16 +33,17 @@ export async function fetchingprofile(jwt){
     let total = 70000
     let totalXp = data.data.user[0].xps
     await totalXp.forEach(elm => {
-      if ((elm["originEventId"])==41){
+      if ((elm["originEventId"])==41  ||(elm["originEventId"])==490 ||(elm["originEventId"])== 458 ||(elm["originEventId"])==305){
          total += elm["amount"]
       }
      
     });
-    userInfoCreate(data.data.user[0].login , data.data.user[0].id ,data.data.user[0].auditRatio ,data.data.user[0].avatarUrl ,total )
+    let userInfo = data.data.user[0]
+    userInfoCreate(userInfo.login , userInfo.id ,userInfo.auditRatio ,userInfo.avatarUrl ,total , userInfo.campus )
 
 }
 
-function userInfoCreate(username,id,auditR,image,total){
+function userInfoCreate(username,id,auditR,image,total,campus){
     let userInfo = document.createElement('div')
     userInfo.className = 'userInfo'
     document.body.style.background = 'white'
@@ -54,6 +56,8 @@ function userInfoCreate(username,id,auditR,image,total){
     <br>
     <h1>audit Ratio : ${Number(auditR).toFixed(2)}</h1>
      <br>
-    <h1>total Xp : ${total}</h1>`
+    <h1>total Xp : ${total}</h1>
+    <h1>Campus : ${campus}</h1>
+    `
     document.body.appendChild(userInfo)
 }
