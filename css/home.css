@@ -1,0 +1,495 @@
+/* ===== DESIGN SYSTEM — Hacker Matrix Dashboard ===== */
+
+:root {
+    --bg-primary: #000000; /* pitch black */
+    --bg-secondary: #111111;
+    --surface: rgba(0, 255, 0, 0.04);
+    --surface-hover: rgba(0, 255, 0, 0.12);
+    --border: rgba(0, 255, 0, 0.3);
+    --border-glow: rgba(0, 255, 0, 0.7);
+
+    --text-primary: #00ff00;
+    --text-secondary: rgba(0, 255, 0, 0.6);
+    --text-muted: rgba(0, 255, 0, 0.3);
+
+    --accent: #00ff00;
+    --accent-light: #6f6;
+    --accent-glow: rgba(0, 255, 0, 0.4);
+    --gradient-accent: linear-gradient(135deg, #00ff00, #6f6);
+    --gradient-accent-2: linear-gradient(135deg, #00ff00, #090);
+
+    --success: #22c55e;
+    --danger: #ef4444;
+
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+
+    --font: 'Courier New', monospace;
+}
+
+/* ===== RESET & BASE ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font);
+    background-color: var(--bg-primary);
+    /* matrix-like falling code effect could be added via JS later */
+    background-image: none;
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+
+
+body {
+    animation: flicker 3s infinite;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* ===== APP LAYOUT ===== */
+#app {
+    width: 100%;
+    max-width: 1100px;
+    padding: 30px 20px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    gap: 20px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+/* ===== GLASS CARD BASE ===== */
+.glass-card {
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: cardEnter 0.6s ease-out both;
+}
+
+.glass-card:hover {
+    background: var(--surface-hover);
+    border-color: var(--accent);
+    box-shadow: 0 8px 40px var(--accent-glow);
+    transform: translateY(-2px);
+}
+
+/* Stagger card animations */
+.glass-card:nth-child(1) { animation-delay: 0.05s; }
+.glass-card:nth-child(2) { animation-delay: 0.1s; }
+.glass-card:nth-child(3) { animation-delay: 0.15s; }
+.glass-card:nth-child(4) { animation-delay: 0.2s; }
+.glass-card:nth-child(5) { animation-delay: 0.25s; }
+
+.card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-secondary);
+}
+
+.card-header .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    box-shadow: 0 0 8px var(--accent-glow);
+}
+
+/* ===== USER INFO — spans full width ===== */
+#userInfo {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+    min-height: 80px;
+}
+
+.avatar-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--gradient-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+    box-shadow: 0 4px 15px var(--accent-glow);
+}
+
+.user-details {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.user-details .user-name-display {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.user-details .user-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.user-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+#logout {
+    position: absolute;
+    right: 5%;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    background-image: url("../icons/logout.svg");
+    background-size: 18px;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(0.5) sepia(1) saturate(5) hue-rotate(330deg);
+}
+
+#logout:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: rgba(239, 68, 68, 0.3);
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.15);
+    transform: scale(1.05);
+}
+
+/* ===== MODULE INFO — spans full width ===== */
+#moduleInfo {
+    grid-column: 1 / -1;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 20px 16px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--border-glow);
+    background: rgba(99, 102, 241, 0.04);
+}
+
+.stat-card .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.stat-card .stat-value {
+    font-size: 22px;
+    font-weight: 700;
+    background: var(--gradient-accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== LINE GRAPH SECTION ===== */
+#line {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+}
+
+#typeInfo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 12px;
+}
+
+#type {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 500;
+    padding: 10px 16px;
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    outline: none;
+    min-width: 140px;
+}
+
+#type:hover,
+#type:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+#type option {
+    background-color: #1a1a2e;
+    color: #f0f0f5;
+    padding: 10px;
+}
+
+#level,
+#xp {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 8px;
+}
+
+#lineGraph {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+}
+
+#textXP {
+    font-family: var(--font) !important;
+    font-size: 13px !important;
+    font-weight: 500;
+}
+
+/* ===== PIE / RADAR CHART ===== */
+#pie {
+    width: 100%;
+    border-radius: var(--radius-sm);
+    overflow: visible;
+}
+
+#textPercentage {
+    font-family: var(--font);
+    font-size: 16px;
+    font-weight: 600;
+    fill: var(--text-primary);
+}
+
+.Btn {
+    font-family: var(--font);
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--accent-light);
+    cursor: pointer;
+    transition: fill 0.2s ease;
+    text-decoration: none;
+}
+
+.Btn:hover {
+    fill: var(--text-primary);
+}
+
+/* ===== PASS/FAIL RATIO RINGS ===== */
+#passfail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    gap: 16px;
+}
+
+.ratio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.ratio svg {
+    width: 130px;
+    filter: drop-shadow(0 0 8px var(--accent-glow));
+}
+
+.ratio span {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+}
+
+/* ===== LOADING SPINNER ===== */
+.loading-container {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.08);
+    border-top: 3px solid var(--accent);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* ===== SVG TEXT GLOBAL ===== */
+svg text {
+    font-family: var(--font);
+    fill: var(--text-secondary);
+    font-size: 12px;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes cardEnter {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes ringFill {
+    from { stroke-dashoffset: 314; }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    #app {
+        grid-template-columns: 1fr;
+        padding: 20px 16px 40px;
+        gap: 16px;
+    }
+
+    #userInfo {
+        grid-column: 1;
+        flex-wrap: wrap;
+    }
+
+    #moduleInfo {
+        grid-column: 1;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #line,
+    #pie-container {
+        grid-column: 1;
+    }
+
+    #passfail {
+        grid-column: 1;
+    }
+
+    #typeInfo {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .stat-card .stat-value {
+        font-size: 18px;
+    }
+
+    .user-details .user-name-display {
+        font-size: 16px;
+    }
+
+    .glass-card {
+        padding: 18px 16px;
+    }
+}
