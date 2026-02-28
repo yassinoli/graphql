@@ -3,7 +3,9 @@ import { signin } from "./auth/login.js";
 import { logout } from "./auth/logout.js";
 import { recieveData } from "./graphql/fetch.js";
 import { query } from "./graphql/querys.js";
-
+import { userinfo } from "./graphql/userInfo.js";
+import { auditInfo } from "./graphql/userInfo.js";
+export let info
 export const start = async () => {
   let app = document.querySelector("#app");
   if (!app) {
@@ -20,15 +22,10 @@ export const start = async () => {
     });
   } else {
     let data = await recieveData(query)
-    let info = data.data.user[0]
-    console.log(info);
-    
+    info = data.data.user[0]    
     app.innerHTML = `<div id="logout"></div>`
-    app.innerHTML += `<p>
-    username     : ${info.login} <br>
-    phone Number : ${info.attrs.tel}
-    </p>`
-
+    app.innerHTML += userinfo(info)
+    app.innerHTML += auditInfo(info)
     document.getElementById("logout").onclick = logout;
   }
 };
