@@ -4,25 +4,13 @@ export let query = `
       id
       login
       attrs
-      email
       campus
-      profile
       lastName
       firstName
       avatarUrl
       auditRatio
       totalUp
-      totalUpBonus
-      totalDown
-      roles { slug }
-      labels { labelName, labelId, eventId }
-      records {
-        startAt
-        endAt
-        message
-        createdAt
-        type { canAccessPlatform, isPermanent, canBeAuditor, label, type }
-      }
+      labels { labelName }
       transactions (
         order_by: [{ type: desc }, { amount: desc }]
         distinct_on: [type]
@@ -30,3 +18,21 @@ export let query = `
       { type, amount }
     }
     }`
+
+
+    export let xpandlevel = `{
+    xp: transaction_aggregate(
+      where: {
+        type: { _eq: "xp" }
+        eventId: { _eq: 41 }
+      }
+    ) { aggregate { sum { amount } } }
+    level: transaction(
+      limit: 1
+      order_by: { amount: desc }
+      where: {
+        type: { _eq: "level" }
+        eventId: { _eq: 41 }
+      }
+    ) { amount }
+  }`

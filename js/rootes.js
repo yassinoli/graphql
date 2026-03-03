@@ -5,6 +5,7 @@ import { recieveData } from "./graphql/fetch.js";
 import { query } from "./graphql/querys.js";
 import { userinfo } from "./graphql/userInfo.js";
 import { auditInfo } from "./graphql/userInfo.js";
+import { xpandlevel } from "./graphql/querys.js";
 export let info
 export const start = async () => {
   let app = document.querySelector("#app");
@@ -22,9 +23,14 @@ export const start = async () => {
     });
   } else {
     let data = await recieveData(query)
-    info = data.data.user[0]    
+    let xps = await recieveData(xpandlevel)
+    info = data.data.user[0]   
+    let xplevel = xps.data 
+    console.log(xplevel.xp.aggregate.sum.amount); // xp
+    console.log(xplevel.level[0].amount); //level
+    
     app.innerHTML = `<div id="logout"></div>`
-    app.innerHTML += userinfo(info)
+    app.innerHTML += userinfo(info , xplevel)
     app.innerHTML += auditInfo(info)
     document.getElementById("logout").onclick = logout;
   }

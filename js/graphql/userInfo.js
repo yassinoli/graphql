@@ -1,9 +1,14 @@
-export function userinfo(info){
+export function userinfo(info , xp){
     return `
     <p class="userInfo">
     username     : ${info.login} <br>
     phone Number : ${info.attrs.tel} <br>
+    last name    : ${info.lastName} <br>
+    first name   : ${info.firstName} <br>
     city         : ${info.attrs.city} <br>
+    cohort       : ${info.labels[0].labelName} <br>
+    xp           : ${Math.round(Number(xp.xp.aggregate.sum.amount)/1000)} KB <br>
+    level        : ${xp.level[0].amount} <br>
     </p>
     <div><img src="${info.attrs.avatarUrl}" class="avatar-circle"></div>
 `
