@@ -36,3 +36,53 @@ export let query = `
       }
     ) { amount }
   }`
+
+  export let progress = `{
+    progress (
+      order_by: [{ path: asc} , {createdAt: asc}, {grade: asc }]
+      where: {
+        _or: [
+          {
+            event: {
+              object: { type: { _eq: "module" } }
+            }
+          },
+          {
+            _and: [
+              { object: { type: { _eq: "piscine" } } }
+              {
+                event: {
+                  parent: { object: { type: { _eq: "module" } } }
+                  parentId: { _eq: 41 }
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ) {
+      id
+      path
+      grade
+      isDone
+      eventId
+      version
+      createdAt
+      updatedAt
+    }
+  }`
+
+  export let transactions = `{
+  transaction(
+    where: {
+      type: {_eq: "xp"},
+      _or: [{object: {type: {_eq: "project"}}}, {object: {type: {_eq: "piscine"}}}]
+    }
+    order_by: {createdAt: asc}
+  ) {
+    amount
+    object {
+      name
+    }
+  }
+} `
