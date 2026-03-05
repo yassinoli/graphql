@@ -18,12 +18,10 @@ Welcome to the **underground GraphQL interface**. This isn't your grandma's dash
 
 ---
 
-🛠 **Development**
+visite link bellow to acess :
 
-```bash
-# start your local server (whatever you use)
-npm install
-npm run dev
+[GRAPHQL](https://yassinoli.github.io/graphql)
+
 ```
 
 Stay sharp, keep the terminal open, and enjoy the view. 👾
