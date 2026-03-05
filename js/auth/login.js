@@ -26,7 +26,7 @@ export async function signin() {
     });
 
     if (!response.ok) {
-      alert(`ACCESS DENIED [HTTP ${response.status}]`);
+      alert(`invalid information : username or password invalid`);
       return;
     }
 
