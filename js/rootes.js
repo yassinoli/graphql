@@ -38,11 +38,5 @@ export const start = async () => {
 };
 
 window.onload = start;
-let resizeTimeout;
 
-window.addEventListener("resize", () => {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(() => {
-    location.reload();
-  }, 1000);
-});
+
