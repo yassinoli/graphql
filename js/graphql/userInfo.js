@@ -17,7 +17,7 @@ export function userinfo(info , xp){
 }
 
 
-export function auditInfo(info) {
+export function skillsInfo(info) {
    let skills =  info.transactions.filter(elm => elm.type.startsWith("skill") )
    let skillso = []
    for (let i = 0; i < skills.length; i++) {

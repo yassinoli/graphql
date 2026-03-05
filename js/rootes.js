@@ -3,8 +3,7 @@ import { signin } from "./auth/login.js";
 import { logout } from "./auth/logout.js";
 import { recieveData } from "./graphql/fetch.js";
 import { query } from "./graphql/querys.js";
-import { userinfo } from "./graphql/userInfo.js";
-import { auditInfo } from "./graphql/userInfo.js";
+import { skillsInfo, userinfo } from "./graphql/userInfo.js";
 import { xpandlevel } from "./graphql/querys.js";
 import { transactions } from "./graphql/querys.js";
 import { progress } from "./graphql/userInfo.js";
@@ -30,11 +29,8 @@ export const start = async () => {
     
     info = data.data.user[0]   
     let xplevel = xps.data 
-    console.log(xplevel.xp.aggregate.sum.amount); // xp
-    console.log(xplevel.level[0].amount); //level
-    
     app.innerHTML = userinfo(info , xplevel)
-    auditInfo(info)
+    skillsInfo(info)
     progress(trs)
     
     document.getElementById("logout").onclick = logout;
