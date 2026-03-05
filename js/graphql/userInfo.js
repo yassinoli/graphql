@@ -24,7 +24,10 @@ export function skillsInfo(info) {
        const elm = skills[i];
        skillso[i] = `${elm.type.slice(6)} = ${elm.amount}`
     }
-    document.body.innerHTML += `<div class="graph-container"><div class="graph-title">Skills</div><div class="chart-wrapper"><svg id="chart" width="1000" height="350" viewBox="0 0 1000 350" preserveAspectRatio="xMidYMid meet"></svg></div></div>`
+    document.body.innerHTML += `<div class="graph-container">
+    <div class="graph-title">Skills</div>
+    <div class="chart-wrapper"><svg id="chart" width="1000" height="350" viewBox="0 0 1000 350" preserveAspectRatio="xMidYMid meet"></svg></div>
+    </div>`
     
 // parse data
 const data = skillso.map(item => {

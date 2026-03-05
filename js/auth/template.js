@@ -6,7 +6,6 @@ export const LoginPage = `
 
         <label for="password">password</label>
         <input type="password" id="password" name="password" required>
-        <img id="iconVisibil" src="icons/visibility_on.svg">
         <button id="btnLogin" type="submit">ENTER</button>
     </div>`;
 

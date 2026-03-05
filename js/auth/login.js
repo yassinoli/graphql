@@ -4,7 +4,7 @@ export async function signin() {
   let username = document.querySelector("#username");
   let password = document.querySelector("#password");
   if (!username || !password) {
-    console.log("%c[!] form missing", "color:#0f0");
+   alert("missing field");
     return;
   }
 
@@ -34,7 +34,7 @@ export async function signin() {
     localStorage.setItem("jwt", data);
     start();
   } catch (error) {
-    console.error("%c[!] fetch failed", "color:#f00", error);
+    console.error("fetch failed", error);
     return null;
   }
 }
