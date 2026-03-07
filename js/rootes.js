@@ -11,7 +11,7 @@ export let info
 export const start = async () => {
   let app = document.querySelector("#app");
   if (!app) {
-    return;
+    document.body.innerHTML += `<div id="app"></div>`
   }
   let jwt = localStorage.getItem("jwt");
   if (!jwt) {
