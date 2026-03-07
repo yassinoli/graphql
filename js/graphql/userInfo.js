@@ -6,9 +6,6 @@ export function userinfo(info , xp){
             <div class="user-info-row"><strong>Name:</strong> ${info.firstName} ${info.lastName}</div>
             <div class="user-info-row"><strong>City:</strong> ${info.attrs.city}</div>
             <div class="user-info-row"><strong>Phone:</strong> ${info.attrs.tel}</div>
-            <div class="user-info-row"><strong>Cohort:</strong> ${info.labels[0].labelName}</div>
-            <div class="user-info-row"><strong>XP:</strong> ${Math.round(Number(xp.xp.aggregate.sum.amount)/1000)} KB</div>
-            <div class="user-info-row"><strong>Level:</strong> ${xp.level[0].amount}</div>
         </div>
         <img src="${info.attrs.avatarUrl}" class="avatar-circle" alt="User Avatar">
         <button id="logout" title="Logout"></button>
