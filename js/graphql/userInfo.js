@@ -6,7 +6,6 @@ export function userinfo(info , xp){
             <div class="user-info-row"><strong>Name:</strong> ${info.firstName} ${info.lastName}</div>
             <div class="user-info-row"><strong>City:</strong> ${info.attrs.city}</div>
             <div class="user-info-row"><strong>Phone:</strong> ${info.attrs.tel}</div>
-            <div class="user-info-row"><strong>Cohort:</strong> ${info.labels[0].labelName}</div>
             <div class="user-info-row"><strong>XP:</strong> ${Math.round(Number(xp.xp.aggregate.sum.amount)/1000)} KB</div>
             <div class="user-info-row"><strong>Level:</strong> ${xp.level[0].amount}</div>
         </div>
@@ -25,7 +24,7 @@ export function skillsInfo(info) {
        skillso[i] = `${elm.type.slice(6)} = ${elm.amount}`
     }
     document.body.innerHTML += `<div class="graph-container">
-    <div class="graph-title">Skills</div>
+    <div class="graph-title">Skills %</div>
     <div class="chart-wrapper"><svg id="chart" width="1000" height="350" viewBox="0 0 1000 350" preserveAspectRatio="xMidYMid meet"></svg></div>
     </div>`
     

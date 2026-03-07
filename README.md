@@ -96,11 +96,3 @@ The project is automatically deployed to GitHub Pages using GitHub Actions:
 ## visite link bellow to acess :
 
 [GRAPHQL](https://yassinoli.github.io/graphql)
-
-
-
-
-## 🙏 Acknowledgments
-
-- Zone01 Oujda for providing the learning platform and API
-- The Zone01 community for inspiration and feedback

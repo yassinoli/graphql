@@ -10,7 +10,6 @@ export let query = `
       avatarUrl
       auditRatio
       totalUp
-      labels { labelName }
       transactions (
         order_by: [{ type: desc }, { amount: desc }]
         distinct_on: [type]
